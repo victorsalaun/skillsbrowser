@@ -13,8 +13,9 @@
     <name>skillsbrowser</name>
 
     <modules>
-        <module>employee-service</module>
         <module>config</module>
+        <module>registry</module>
+        <module>employee-service</module>
     </modules>
 
 </project>
