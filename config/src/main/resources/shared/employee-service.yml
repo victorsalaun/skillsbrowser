@@ -1,0 +1,3 @@
+server:
+  context-path: /employees
+  port: 6000
