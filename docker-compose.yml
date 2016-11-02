@@ -11,7 +11,7 @@ services:
         max-file: "10"
 
   config:
-    image: vitoo/skillsbrowser-config
+    image: victorsalaun/skillsbrowser-config
     restart: always
     logging:
       options:
@@ -19,7 +19,7 @@ services:
         max-file: "10"
 
   registry:
-    image: vitoo/skillsbrowser-registry
+    image: victorsalaun/skillsbrowser-registry
     restart: always
     ports:
       - 8761:8761
@@ -29,7 +29,7 @@ services:
         max-file: "10"
 
   gateway:
-    image: vitoo/skillsbrowser-gateway
+    image: victorsalaun/skillsbrowser-gateway
     restart: always
     ports:
       - 80:4000
@@ -39,7 +39,7 @@ services:
         max-file: "10"
 
   employee-service:
-    image: vitoo/skillsbrowser-employee-service
+    image: victorsalaun/skillsbrowser-employee-service
     restart: always
     logging:
       options:
@@ -47,7 +47,7 @@ services:
         max-file: "10"
 
   monitoring:
-    image: vitoo/skillsbrowser-monitoring
+    image: victorsalaun/skillsbrowser-monitoring
     restart: always
     ports:
       - 9000:8080
