@@ -1,3 +1,53 @@
 language: java
+
 jdk:
   - oraclejdk8
+
+sudo: false
+
+services:
+  - docker
+
+env:
+  global:
+  - secure: rPp3i3JdDkGARK3OpFEFJXRTtkYURZhL65GOg0olAEW/wMWr9a8jQokgChXgspAIny+LcmhYtO0NTQfa8FcYf1tQj4eIscOPoICt5MiTAIe0LXH0EaCYk4UqtD4A1eyuEAAN2rNegUpN1ApFggF4eAOG6YhyDvXAdxI7r8cnXEPMaeQiD5M7m05wMoXlvwp3xSGgvIqJ9J0aPYDGCzj0gLoXYpEFVyolDHC/P8VadutDNmKWYw+t4NXBj7yyxqNIV+cjTIVuQyIw4F9AFTtZ/Hpjz8GrBNhxKli8/xgSCo6I8hWwyLG0SVetHui6HL7ke5wWPLJO18whOw7BeqAjhdaGXMfVOSHevFmXnse1I5uwEwUcQ+3jaXocfa3wS7A1WvUSCHwvb+4q7Obw2jN93bPNB33P2mYhhDtfsM4HxyVzHGqXqIPZS7YnYWmeKKjS2In5Yh8H1/6TJSk7WSul2/rrAnfL0UvYKEirXGe0Oi8Sajn53xZ0CyoRhZwenmRsfiZYThDCWX+GalC+yX7A+RMdvQl9pluW7iU0YI6Q413mVaIR/nM7cD8MZcdRH7XiYX6YNqtwXYxIO+2bx7zZK4sS0rCZwOiA2tpYfhdtuHNfVPvlO91rWx8g0rGCoLE+/xWH7b/re3upVBxSCKCBg2jr+6Z5u763a5bBmmxZu1A=
+  - secure: CJL3ajCIlem2eqjxukWdPLk7LveRDj3X170lUvHsGX7wTJDCxchBcLLzVEaXtLLY9h1Cl7GEZAxJTNNkTOAfX2qYEkuxsqLMUjrkiRkuPeAxzy6k4Flb1jZlVFZMiFbnDHP1E4ECNiHg2gZ3OCKf87ov9dcrkp+DPYgluCdI+1FGdBltpGgjdBLkisMx4UFTvrQu09Gci28UeDbIH7JoHz62VV8Ub6B05Ja90DOqAOMxDv5n63o86VJTBE/rBL6BBPRIon6BNb9FyU7HXTTEYrvlS+0cTem1P6S3P9trACPFcONDoTiEUdWboJeq1vLT1gDv0sA6u+dfhnmkp5OgqFCBM4tG/vlfo8bp2/8n8QNtiglrWYZ+prfiYMtuO8FubWKPuvpcJ8jzudkkhzrjhKLLeo7aArdAeZy15ri7czYuORUNol3SXG8dqYkrPNI9thGkRYq6UOh55uMF2mRcM/0MTPfzY8tmNof9uObEsuTwZy5ACN3Qa3sTKOvXebQBD4A3t1S07j1wlqjtdEls9cMKmmMpbXLTJY3nyRIhZO2258zl8TJLzxkPk6eOs8+polW2FVKccTz02uEdOkZ/5rV5/0Vem2/uL5gp54vM4rxGR+7araET4+oBOsoqLCcoCK95W+UFjsdjwiVKhK669J62Kayv2Us3x+A/wgGmniU=
+  - secure: hjC9OGtRZMs7Vuub0i0V2rAnSMABBHH3PS4tc74jEygiCADlF1gL1p/SZlHgDHO2c94pTcAN19sttQSQSYaR9umyvCnadKjVRXDhsig5geQLOpEgMUt293QgrPPZPdIw5S3l9XUwLfpbkQcRNZauAQstz5pP2y53LqKlXqaqkISbp3gnwDjSLxwEpCdBCWEs/5axWLodSJ8m0OHFkyxek7rnlQA+1ik/xdwo1sQbiJ2VtceqWN0R37dwlzGaG8KBPkmZQ5bMZ+CjTVxox1YCds3V1JoYAHnqG3f9iMlkapwD5I9AxPhNy5SpAf+djJm+XhIg0pQzZZ0cFiHRiUj3zNsIObNpEYFtN9i/UDfLWAk6H2rut5jxci6ct4okLB2eir7nQC9yOTSjVoZ4lrfNkXksYUSs8xogNXp31rL8O80HxCoPlJK36I6bP3uV23aLOoDnd9st1HQCqifpu5rhWG/D73fmGyzQeHxto2+kuraL6XfZ7PLhCvDLYYF1xlHOLe2VyLpnioFMqDTtuEs6cBLsCIhA65bE2e8fypbJ6F/egjGQX0hZn/ZKGGxrKH4YOM/rGx+b0mBD+BsnjoYkfvwm12eg1oPJA/uut65DI3RzUD1qGpanpDCRd5cxpvYWDpGYFkdkS2P9lhUuwfeJ8mCfYWq0+h4MPCYmyaxo3zE=
+  - COMMIT=${TRAVIS_COMMIT::7}
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+
+  # TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+  # CONFIG SERVICE
+  - export CONFIG=victorsalaun/skillsbrowser-config
+  - docker build -t $CONFIG:$COMMIT ./config
+  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
+  - docker push $CONFIG
+
+  # REGISTRY
+  - export REGISTRY=victorsalaun/skillsbrowser-registry
+  - docker build -t $REGISTRY:$COMMIT ./registry
+  - docker tag $REGISTRY:$COMMIT $REGISTRY:$TAG
+  - docker push $REGISTRY
+
+  # EMPLOYEE SERVICE
+  - export EMPLOYEE_SERVICE=victorsalaun/skillsbrowser-employee-service
+  - docker build -t $EMPLOYEE_SERVICE:$COMMIT ./employee-service
+  - docker tag $EMPLOYEE_SERVICE:$COMMIT $EMPLOYEE_SERVICE:$TAG
+  - docker push $EMPLOYEE_SERVICE
+
+  # GATEWAY
+  - export GATEWAY=victorsalaun/skillsbrowser-gateway
+  - docker build -t $GATEWAY:$COMMIT ./gateway
+  - docker tag $GATEWAY:$COMMIT $GATEWAY:$TAG
+  - docker push $GATEWAY
+
+  # MONITORING
+  - export MONITORING=victorsalaun/skillsbrowser-monitoring
+  - docker build -t $MONITORING:$COMMIT ./monitoring
+  - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
+  - docker push $MONITORING
