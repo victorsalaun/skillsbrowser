@@ -13,10 +13,10 @@
     <name>skillsbrowser</name>
 
     <modules>
-        <module>config</module>
-        <module>monitoring</module>
-        <module>registry</module>
-        <module>gateway</module>
+        <module>config-service</module>
+        <module>monitoring-service</module>
+        <module>registry-service</module>
+        <module>gateway-ui</module>
         <module>employee-service</module>
     </modules>
 

@@ -1,5 +1,6 @@
 version: '2'
 services:
+
   rabbitmq:
     image: rabbitmq:3-management
     restart: always
@@ -10,16 +11,16 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  config:
-    image: victorsalaun/skillsbrowser-config
+  config-service:
+    image: victorsalaun/skillsbrowser-config-service
     restart: always
     logging:
       options:
         max-size: "10m"
         max-file: "10"
 
-  registry:
-    image: victorsalaun/skillsbrowser-registry
+  registry-service:
+    image: victorsalaun/skillsbrowser-registry-service
     restart: always
     ports:
       - 8761:8761
@@ -28,8 +29,8 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  gateway:
-    image: victorsalaun/skillsbrowser-gateway
+  gateway-ui:
+    image: victorsalaun/skillsbrowser-gateway-ui
     restart: always
     ports:
       - 80:4000
@@ -46,8 +47,8 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  monitoring:
-    image: victorsalaun/skillsbrowser-monitoring
+  monitoring-service:
+    image: victorsalaun/skillsbrowser-monitoring-service
     restart: always
     ports:
       - 9000:8080
