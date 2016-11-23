@@ -47,6 +47,14 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  employee-service-mongodb:
+    image: victorsalaun/skillsbrowser-mongodb
+    restart: always
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
   monitoring-service:
     image: victorsalaun/skillsbrowser-monitoring-service
     restart: always

@@ -22,5 +22,10 @@ services:
     ports:
       - 6000:6000
 
+  employee-service-mongodb:
+    build: mongodb
+    ports:
+      - 26000:27017
+
   monitoring-service:
     build: monitoring
