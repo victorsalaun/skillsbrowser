@@ -40,12 +40,6 @@ after_success:
   - docker tag $EMPLOYEE_SERVICE:$COMMIT $EMPLOYEE_SERVICE:$TAG
   - docker push $EMPLOYEE_SERVICE
 
-  # EMPLOYEE SERVICE MONGODB
-  - export EMPLOYEE_SERVICE_MONGODB=victorsalaun/skillsbrowser-employee-service-mongodb
-  - docker build -t $EMPLOYEE_SERVICE_MONGODB:$COMMIT ./employee-service-mongodb
-  - docker tag $EMPLOYEE_SERVICE_MONGODB:$COMMIT EMPLOYEE_SERVICE_MONGODB:$TAG
-  - docker push $EMPLOYEE_SERVICE_MONGODB
-
   # GATEWAY
   - export GATEWAY=victorsalaun/skillsbrowser-gateway
   - docker build -t $GATEWAY:$COMMIT ./gateway
@@ -57,3 +51,9 @@ after_success:
   - docker build -t $MONITORING:$COMMIT ./monitoring
   - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
   - docker push $MONITORING
+
+  # MONGODB
+  - export MONGO_DB=victorsalaun/skillsbrowser-mongodb
+  - docker build -t $MONGO_DB:$COMMIT ./mongodb
+  - docker tag $MONGO_DB:$COMMIT $MONGO_DB:$TAG
+  - docker push $MONGO_DB
