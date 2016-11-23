@@ -51,3 +51,9 @@ after_success:
   - docker build -t $MONITORING:$COMMIT ./monitoring
   - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
   - docker push $MONITORING
+
+  # MONGODB
+  - export MONGO_DB=victorsalaun/skillsbrowser-mongodb
+  - docker build -t $MONGO_DB:$COMMIT ./mongodb
+  - docker tag $MONGO_DB:$COMMIT $MONGO_DB:$TAG
+  - docker push $MONGO_DB

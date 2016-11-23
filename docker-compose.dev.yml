@@ -6,21 +6,26 @@ services:
     ports:
       - 5672:5672
 
-  config:
+  config-service:
     build: config
     ports:
       - 8888:8888
 
-  registry:
-    build: registry
+  registry-service:
+    build: registry-service
 
-  gateway:
-    build: gateway
+  gateway-ui:
+    build: gateway-ui
 
   employee-service:
     build: employee-service
     ports:
       - 6000:6000
 
-  monitoring:
+  employee-service-mongodb:
+    build: mongodb
+    ports:
+      - 26000:27017
+
+  monitoring-service:
     build: monitoring

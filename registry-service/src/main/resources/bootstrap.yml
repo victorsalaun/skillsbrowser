@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    config:
+      uri: ${CONFIG-SERVICE}
+      fail-fast: true
