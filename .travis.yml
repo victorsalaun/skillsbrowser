@@ -24,36 +24,36 @@ after_success:
 
   # CONFIG SERVICE
   - export CONFIG=victorsalaun/skillsbrowser-config-service
-  - docker build -t $CONFIG:$COMMIT ./config-service/src/main/docker
+  - docker build -t $CONFIG:$COMMIT ./config-service
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
 
   # REGISTRY SERVICE
   - export REGISTRY=victorsalaun/skillsbrowser-registry-service
-  - docker build -t $REGISTRY:$COMMIT ./registry-service/src/main/docker
+  - docker build -t $REGISTRY:$COMMIT ./registry-service
   - docker tag $REGISTRY:$COMMIT $REGISTRY:$TAG
   - docker push $REGISTRY
 
   # EMPLOYEE SERVICE
   - export EMPLOYEE_SERVICE=victorsalaun/skillsbrowser-employee-service
-  - docker build -t $EMPLOYEE_SERVICE:$COMMIT ./employee-service/src/main/docker
+  - docker build -t $EMPLOYEE_SERVICE:$COMMIT ./employee-service
   - docker tag $EMPLOYEE_SERVICE:$COMMIT $EMPLOYEE_SERVICE:$TAG
   - docker push $EMPLOYEE_SERVICE
 
   # GATEWAY UI
   - export GATEWAY=victorsalaun/skillsbrowser-gateway-ui
-  - docker build -t $GATEWAY:$COMMIT ./gateway-ui/src/main/docker
+  - docker build -t $GATEWAY:$COMMIT ./gateway-ui
   - docker tag $GATEWAY:$COMMIT $GATEWAY:$TAG
   - docker push $GATEWAY
 
   # MONITORING SERVICE
   - export MONITORING=victorsalaun/skillsbrowser-monitoring-service
-  - docker build -t $MONITORING:$COMMIT ./monitoring-service/src/main/docker
+  - docker build -t $MONITORING:$COMMIT ./monitoring-service
   - docker tag $MONITORING:$COMMIT $MONITORING:$TAG
   - docker push $MONITORING
 
   # MONGODB
   - export MONGO_DB=victorsalaun/skillsbrowser-mongodb
-  - docker build -t $MONGO_DB:$COMMIT ./mongodb/src/main/docker
+  - docker build -t $MONGO_DB:$COMMIT ./mongodb
   - docker tag $MONGO_DB:$COMMIT $MONGO_DB:$TAG
   - docker push $MONGO_DB
