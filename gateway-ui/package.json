@@ -1,0 +1,16 @@
+{
+  "name": "skillsbrowser",
+  "version": "0.0.0",
+  "description": "SkillsBrowser",
+  "author": "Victor SALAUN <victor.salaun@gmail.com>",
+  "dependencies": {
+    "bower": "^1.8.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.13.3"
+  },
+  "scripts": {
+    "postinstall": "bower install --force-latest",
+    "prestart": "npm install"
+  }
+}
