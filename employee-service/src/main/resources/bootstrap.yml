@@ -1,7 +1,10 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
+
 spring:
-  application:
-    name: employee-service
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: ${CONFIG-SERVICE}
       fail-fast: true

@@ -7,7 +7,7 @@ services:
       - 5672:5672
 
   config-service:
-    build: config
+    build: config-service
     ports:
       - 8888:8888
 
@@ -28,4 +28,4 @@ services:
       - 26000:27017
 
   monitoring-service:
-    build: monitoring
+    build: monitoring-service
